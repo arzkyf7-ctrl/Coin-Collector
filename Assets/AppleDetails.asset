@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b66390a56e0e24fbc84e9e4e71399d, type: 3}
   m_Name: AppleDetails
   m_EditorClassIdentifier: Assembly-CSharp::ItemDetails
-  itemName: Mushroom
+  itemName: Apple
   quantity: 1
-  itemSprite: {fileID: 6553798187587934576, guid: cd493e8e770c0cf41be402ed40453616, type: 3}
-  description: This is a mushroom
+  itemSprite: {fileID: 8535626180064015413, guid: cd493e8e770c0cf41be402ed40453616, type: 3}
+  description: This is an Apple

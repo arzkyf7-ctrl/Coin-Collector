@@ -7,6 +7,7 @@ public class HUD : MonoBehaviour
     private int maxHealth;
     private void SetupHealthBar(GameObject player)
     {
+        Debug.Log("HUD setup dipanggil, player: " + player);
         if (healthbar == null || player == null)
         {
             return;
@@ -23,6 +24,7 @@ public class HUD : MonoBehaviour
     }
     private void UpdateHealthBar(int currentHealth)
     {
+        Debug.Log("HUD Update: current = " + currentHealth + "Max = " + maxHealth);
         if (healthbar == null || maxHealth <= 0)
         {
             return;

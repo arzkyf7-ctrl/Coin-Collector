@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using UnityEngine.AdaptivePerformance;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int hp = 100;
@@ -19,7 +17,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj!=null)
+        if (playerObj != null)
         {
             player = playerObj.transform;
         }
@@ -52,6 +50,7 @@ public class Enemy : MonoBehaviour
     }
     void PeriksaTransisi()
     {
+        Debug.Log("Jarak: " + JarakDeteksi + "| state: " + state);
         float jarak = JarakKePlayer();
 
         if (jarak <= JarakSerang)
@@ -79,32 +78,37 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Serang()
     {
-        Debug.Log("Enemy Serang");
-        FindAnyObjectByType<PlayerHealth>().TakeDamage(damage);
-
+        Debug.Log("Dipanggil oleh " + name);
+        if (player == null)
+        {
+            return;
+        }
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        if (health != null)
+        {
+            health.TakeDamage(damage);
+        }
     }
-
-    // Dipanggil otomatis oleh Unity saat collider enemy menabrak collider lain.
     // Karena ada di class induk, SEMUA turunan zombie ikut punya perilaku ini.
     void PerilakuIdle()
     {
-        Debug.Log("Enemy sedang IDLE");
+        //Debug.Log("Enemy sedang IDLE");
     }
 
     void PerilakuPatrol()
     {
-        Debug.Log("Enemy sedang PATROL");
+        //Debug.Log("Enemy sedang PATROL");
     }
 
     void PerilakuChase()
     {
         Kejar();
-        Debug.Log("Enemy sedang CHASE");
+        //Debug.Log("Enemy sedang CHASE");
     }
 
     void PerilakuAttack()
     {
-        Debug.Log("Enemy sedang ATTACK");
+        Serang();
         Destroy(gameObject);
     }
 
