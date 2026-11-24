@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     //item data
     public string itemName;
@@ -21,13 +21,8 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] public GameObject SelectedPanel;
     public bool isItemSelected;
     public InventoryManager inventoryManager;
-    public ItemDetails ItemDetails => ItemDetails;
+    public ItemDetails ItemDetails => itemDetails;
     private ItemDetails itemDetails;
-    public void Start()
-    {
-        inventoryManager = FindAnyObjectByType<InventoryManager>();
-
-    }
     public void AddItem(ItemDetails item)
     {
         itemDetails = item;
@@ -35,7 +30,7 @@ public class ItemSlot : MonoBehaviour
         itemSprite = item.ItemSprite;
         AddQuantity(item.ItemQuantity);
     }
-    public bool isEmpty =>itemQty <= 0;
+    public bool isEmpty => itemQty <= 0;
     public bool CanStackWith(string otherItemName)
     {
         return !isFull && itemName == otherItemName;
@@ -50,11 +45,11 @@ public class ItemSlot : MonoBehaviour
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button==PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            LeftClick();   
+            LeftClick();
         }
-        if (eventData.button==PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             RightClick();
         }
@@ -65,6 +60,7 @@ public class ItemSlot : MonoBehaviour
         {
             return;
         }
+        inventoryManager.SelectSlot(this);
     }
     private void RightClick()
     {

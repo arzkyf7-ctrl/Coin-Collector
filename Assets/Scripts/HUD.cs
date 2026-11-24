@@ -5,24 +5,38 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
     private int maxHealth;
-    private void setupHealthBar(GameObject player)
+    private void SetupHealthBar(GameObject player)
     {
-        healthbar.value = healthbar.maxValue;
-        maxHealth = player.GetComponent<PlayerHealth>().maxHealth;
+        if (healthbar == null || player == null)
+        {
+            return;
+        }
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth == null)
+        {
+            return;
+        }
+        maxHealth = playerHealth.MaxHealth;
+        healthbar.minValue = 0f;
+        healthbar.maxValue = 1f;
+        healthbar.value = 1f;
     }
-    private void updateHealthBar(int currentHealth)
+    private void UpdateHealthBar(int currentHealth)
     {
-        healthbar.value = (float) currentHealth/ maxHealth;
-        healthbar.value = Mathf.Clamp01(healthbar.value);
+        if (healthbar == null || maxHealth <= 0)
+        {
+            return;
+        }
+        healthbar.value = Mathf.Clamp01((float)currentHealth / maxHealth);
     }
-    private void OnEnable() 
+    private void OnEnable()
     {
-        GameController.OnPlayerSpawned += setupHealthBar;
-        PlayerHealth.OnPlayerTakeDamage += updateHealthBar;
+        GameController.OnPlayerSpawned += SetupHealthBar;
+        PlayerHealth.OnPlayerTakeDamage += UpdateHealthBar;
     }
     private void OnDisable()
     {
-        GameController.OnPlayerSpawned -= setupHealthBar;
-        PlayerHealth.OnPlayerTakeDamage -= updateHealthBar;
+        GameController.OnPlayerSpawned -= SetupHealthBar;
+        PlayerHealth.OnPlayerTakeDamage -= UpdateHealthBar;
     }
 }

@@ -8,23 +8,25 @@ public class ItemDetailsPanel : MonoBehaviour
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemQtyText;
     [SerializeField] private TMP_Text itemDescriptionText;
-    
-    public void Show(ItemDetails item)
+
+    public void Show(ItemDetails item, int quantity)
     {
-        if (item==null)
+        if (item == null)
         {
+            Clear();
             return;
         }
         itemImage.sprite = item.ItemSprite;
+        itemImage.enabled = true;
         itemNameText.text = item.ItemName;
-        itemQtyText.text = "Qty: " + item.ItemQuantity;
+        itemQtyText.text = "Qty: " + quantity;
         itemDescriptionText.text = item.Description;
     }
     public void Clear()
     {
         itemImage.sprite = null;
         itemImage.enabled = false;
-        itemNameText.text="";
+        itemNameText.text = "";
         itemQtyText.text = "";
         itemDescriptionText.text = "";
     }
