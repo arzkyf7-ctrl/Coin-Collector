@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34b66390a56e0e24fbc84e9e4e71399d, type: 3}
-  m_Name: ItemDetails
+  m_Name: MushroomDetails
   m_EditorClassIdentifier: Assembly-CSharp::ItemDetails
   itemName: Mushroom
   quantity: 1

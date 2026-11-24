@@ -23,6 +23,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public InventoryManager inventoryManager;
     public ItemDetails ItemDetails => itemDetails;
     private ItemDetails itemDetails;
+
     public void AddItem(ItemDetails item)
     {
         itemDetails = item;
